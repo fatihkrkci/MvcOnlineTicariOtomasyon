@@ -105,5 +105,11 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             var values = context.SatisHarekets.Where(x => x.SatisHareketId == id).ToList();
             return View(values);
         }
+
+        public ActionResult UrunListesi()
+        {
+            var values = context.Uruns.ToList();
+            return View(values);
+        }
     }
 }
