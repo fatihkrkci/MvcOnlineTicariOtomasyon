@@ -1,0 +1,44 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Entities
+@model List<Fatura>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <br />
+    <a href="/Departman/DepartmanEkle" class="btn btn-primary">Yeni Departman Ekle</a>
+    <br />
+    <br />
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Seri No</th>
+            <th>Sıra No</th>
+            <th>Vergi Dairesi</th>
+            <th>Tarih</th>
+            <th>Saat</th>
+            <th>Teslim Eden</th>
+            <th>Teslim Alan</th>
+            <th>İşlemler</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FaturaId</td>
+                <td>@item.FaturaSeriNo</td>
+                <td>@item.FaturaSiraNo</td>
+                <td>@item.VergiDairesi</td>
+                <td>@item.Tarih</td>
+                <td>@item.Saat</td>
+                <td>@item.TeslimEden</td>
+                <td>@item.TeslimAlan</td>
+                <td>
+                    <a href="/Fatura/FaturaDetay/@item.FaturaId" class="btn btn-success">Detaylar</a>
+                    <a href="/Fatura/FaturaGetir/@item.FaturaId" class="btn btn-warning">Güncelle</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
