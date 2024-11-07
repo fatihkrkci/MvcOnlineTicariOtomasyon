@@ -153,6 +153,9 @@
     <Compile Include="Models\Entities\Gider.cs" />
     <Compile Include="Models\Entities\Kategori.cs" />
     <Compile Include="Models\Entities\SatisHareket.cs" />
+    <Compile Include="Models\Entities\SinifGrup.cs" />
+    <Compile Include="Models\Entities\SinifGrup2.cs" />
+    <Compile Include="Models\Entities\SinifGrup3.cs" />
     <Compile Include="Models\Entities\Urun.cs" />
     <Compile Include="Models\Entities\Personel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2851,6 +2854,11 @@
     <Content Include="thumber\scss\_site-navbar.scss" />
     <Content Include="Views\Galeri\Index.cshtml" />
     <Content Include="Views\UrunDetay\Index.cshtml" />
+    <Content Include="Views\Istatistik\SimpleTables.cshtml" />
+    <Content Include="Views\Istatistik\Partial1.cshtml" />
+    <Content Include="Views\Istatistik\Partial2.cshtml" />
+    <Content Include="Views\Istatistik\Partial3.cshtml" />
+    <Content Include="Views\Istatistik\Partial4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
