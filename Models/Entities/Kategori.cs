@@ -12,6 +12,7 @@ namespace MvcOnlineTicariOtomasyon.Models.Entities
         [Key]
         public int KategoriId { get; set; }
 
+        [Display(Name = "Kategori Adı")]
         [Column(TypeName = "Varchar")]
         [StringLength(30)]
         public string KategoriAd { get; set; }

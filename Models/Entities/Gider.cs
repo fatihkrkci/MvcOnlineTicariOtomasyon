@@ -12,6 +12,7 @@ namespace MvcOnlineTicariOtomasyon.Models.Entities
         [Key]
         public int GiderId { get; set; }
 
+        [Display(Name = "Açıklama")]
         [Column(TypeName = "Varchar")]
         [StringLength(100)]
         public string Aciklama { get; set; }

@@ -12,11 +12,18 @@ namespace MvcOnlineTicariOtomasyon.Models.Entities
         [Key]
         public int FaturaKalemId { get; set; }
 
+        [Display(Name = "Açıklama")]
         [Column(TypeName = "Varchar")]
         [StringLength(100)]
         public string Aciklama { get; set; }
+        
+        [Display(Name = "Miktar")]
         public int Miktar { get; set; }
+
+        [Display(Name = "Birim Fiyatı")]
         public decimal BirimFiyat { get; set; }
+
+        [Display(Name = "Tutar")]
         public decimal Tutar { get; set; }
         public int FaturaId { get; set; }
         public virtual Fatura Fatura { get; set; }

@@ -12,6 +12,7 @@ namespace MvcOnlineTicariOtomasyon.Models.Entities
         [Key]
         public int ToDoId { get; set; }
 
+        [Display(Name = "Başlık")]
         [Column(TypeName = "Varchar")]
         [StringLength(100)]
         public string Baslik { get; set; }

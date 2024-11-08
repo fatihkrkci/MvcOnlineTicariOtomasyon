@@ -12,19 +12,23 @@ namespace MvcOnlineTicariOtomasyon.Models.Entities
         [Key]
         public int CariId { get; set; }
 
+        [Display(Name = "Cari Adı")]
         [Column(TypeName = "Varchar")]
         [StringLength(30, ErrorMessage = "En fazla 30 karakter yazabilirsiniz!")]
         public string CariAd { get; set; }
 
+        [Display(Name = "Cari Soyadı")]
         [Column(TypeName = "Varchar")]
         [StringLength(30)]
         [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string CariSoyad { get; set; }
 
+        [Display(Name = "Şehir")]
         [Column(TypeName = "Varchar")]
         [StringLength(13)]
         public string CariSehir { get; set; }
 
+        [Display(Name = "E-Mail Adresi")]
         [Column(TypeName = "Varchar")]
         [StringLength(50)]
         public string CariMail { get; set; }

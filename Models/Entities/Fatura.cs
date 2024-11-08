@@ -12,27 +12,33 @@ namespace MvcOnlineTicariOtomasyon.Models.Entities
         [Key]
         public int FaturaId { get; set; }
 
+        [Display(Name = "Fatura Seri No")]
         [Column(TypeName = "Char")]
         [StringLength(1)]
         public string FaturaSeriNo { get; set; }
 
+        [Display(Name = "Fatura Sıra No")]
         [Column(TypeName = "Varchar")]
         [StringLength(6)]
         public string FaturaSiraNo { get; set; }
         public DateTime Tarih { get; set; }
 
+        [Display(Name = "Vergi Dairesi")]
         [Column(TypeName = "Varchar")]
         [StringLength(60)]
         public string VergiDairesi { get; set; }
 
+        [Display(Name = "Saat")]
         [Column(TypeName = "char")]
         [StringLength(5)]
         public string Saat { get; set; }
 
+        [Display(Name = "Teslim Eden")]
         [Column(TypeName = "Varchar")]
         [StringLength(30)]
         public string TeslimEden { get; set; }
 
+        [Display(Name = "Teslim Alan")]
         [Column(TypeName = "Varchar")]
         [StringLength(30)]
         public string TeslimAlan { get; set; }
