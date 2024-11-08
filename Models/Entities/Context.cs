@@ -19,5 +19,6 @@ namespace MvcOnlineTicariOtomasyon.Models.Entities
         public DbSet<SatisHareket> SatisHarekets { get; set; }
         public DbSet<Urun> Uruns { get; set; }
         public DbSet<Detay> Detays { get; set; }
+        public DbSet<ToDo> ToDos { get; set; }
     }
 }
