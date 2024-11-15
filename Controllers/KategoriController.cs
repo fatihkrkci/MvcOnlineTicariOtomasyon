@@ -1,4 +1,5 @@
 ﻿using MvcOnlineTicariOtomasyon.Models.Entities;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace MvcOnlineTicariOtomasyon.Controllers
     {
         Context context = new Context();
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var categories = context.Kategoris.ToList();
+            var categories = context.Kategoris.ToList().ToPagedList(page, 4);
             return View(categories);
         }
 

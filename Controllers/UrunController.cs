@@ -1,4 +1,5 @@
 ﻿using MvcOnlineTicariOtomasyon.Models.Entities;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,18 @@ namespace MvcOnlineTicariOtomasyon.Controllers
     {
         Context context = new Context();
 
-        public ActionResult Index()
+        public ActionResult Index(string p, int page = 1)
         {
-            var products = context.Uruns.Where(x => x.Durum == true).ToList();
-            return View(products);
+            var products = context.Uruns.Where(x => x.Durum == true);
+            if (!string.IsNullOrEmpty(p))
+            {
+                products = products.Where(y => y.UrunAd.Contains(p));
+            }
+
+            var pagedProducts = products.ToList().ToPagedList(page, 4);
+            return View(pagedProducts);
         }
+
 
         [HttpGet]
         public ActionResult UrunEkle()

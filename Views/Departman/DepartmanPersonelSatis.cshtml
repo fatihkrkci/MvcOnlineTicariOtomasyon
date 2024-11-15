@@ -14,7 +14,6 @@
 </ol>
 <table class="table table-condensed">
     <tr>
-        <th>Satış ID</th>
         <th>Ürün</th>
         <th>Cari</th>
         <th>Fiyat</th>
@@ -26,10 +25,9 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.SatisHareketId</td>
             <td>@item.Urun.UrunAd</td>
             <td>@item.Cari.CariAd @item.Cari.CariSoyad</td>
-            <td>@item.Fiyat</td>
+            <td>@item.Fiyat₺</td>
             <td>@item.Adet</td>
             <td>@item.ToplamTutar</td>
             <td>@item.Tarih.ToString("dd.MM.yyyy")</td>
