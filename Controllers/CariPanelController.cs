@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MvcOnlineTicariOtomasyon.Controllers
 {
@@ -22,6 +23,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             return View(values);
         }
 
+        [Authorize]
         public ActionResult Siparislerim()
         {
             var email = (string)Session["CariMail"];
@@ -31,6 +33,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             return View(values);
         }
 
+        [Authorize]
         public ActionResult GelenMesajlar()
         {
             var email = (string)Session["CariMail"];
@@ -45,6 +48,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             return View(mesajlar);
         }
 
+        [Authorize]
         public ActionResult GonderilenMesajlar()
         {
             var email = (string)Session["CariMail"];
@@ -59,12 +63,13 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             return View(mesajlar);
         }
 
+        [Authorize]
         public ActionResult MesajDetay(int id)
         {
             var degerler = context.Mesajs.Where(x => x.MesajId == id).ToList();
-            
+
             var email = (string)Session["CariMail"];
-            
+
             var gelenMesajSayisi = context.Mesajs.Where(x => x.Alici == email).ToList().Count();
             ViewBag.GelenMesajSayisi = gelenMesajSayisi;
             var gonderilenMesajSayisi = context.Mesajs.Where(x => x.Gonderici == email).ToList().Count();
@@ -73,6 +78,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             return View(degerler);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult YeniMesaj()
         {
@@ -85,6 +91,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult YeniMesaj(Mesaj mesaj)
         {
@@ -95,6 +102,30 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             context.SaveChanges();
 
             return RedirectToAction("GonderilenMesajlar");
+        }
+
+        [Authorize]
+        public ActionResult KargoTakip(string p)
+        {
+            var k = from x in context.KargoDetays select x;
+            k = k.Where(y => y.TakipKodu.Contains(p));
+
+            return View(k.ToList());
+        }
+
+        [Authorize]
+        public ActionResult CariKargoTakip(string id)
+        {
+            var degerler = context.KargoTakips.Where(x => x.TakipKodu == id).ToList();
+
+            return View(degerler);
+        }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
         }
     }
 }
