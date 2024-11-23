@@ -22,5 +22,6 @@ namespace MvcOnlineTicariOtomasyon.Models.Entities
         public DbSet<ToDo> ToDos { get; set; }
         public DbSet<KargoDetay> KargoDetays { get; set; }
         public DbSet<KargoTakip> KargoTakips { get; set; }
+        public DbSet<Mesaj> Mesajs { get; set; }
     }
 }

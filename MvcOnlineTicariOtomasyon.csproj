@@ -148,6 +148,7 @@
     <Compile Include="Controllers\KargoController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MesajController.cs" />
     <Compile Include="Controllers\PersonelController.cs" />
     <Compile Include="Controllers\QRCodeController.cs" />
     <Compile Include="Controllers\SatisController.cs" />
@@ -169,6 +170,10 @@
     <Compile Include="Migrations\202411221323442_migdenemekargolar.designer.cs">
       <DependentUpon>202411221323442_migdenemekargolar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202411231014528_migmesaj.cs" />
+    <Compile Include="Migrations\202411231014528_migmesaj.designer.cs">
+      <DependentUpon>202411231014528_migmesaj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\Admin.cs" />
     <Compile Include="Models\Entities\Cari.cs" />
@@ -182,6 +187,7 @@
     <Compile Include="Models\Entities\KargoDetay.cs" />
     <Compile Include="Models\Entities\KargoTakip.cs" />
     <Compile Include="Models\Entities\Kategori.cs" />
+    <Compile Include="Models\Entities\Mesaj.cs" />
     <Compile Include="Models\Entities\SatisHareket.cs" />
     <Compile Include="Models\Entities\Sinif1.cs" />
     <Compile Include="Models\Entities\Sinif2.cs" />
@@ -2963,9 +2969,14 @@
     <Content Include="Views\Grafik\Index5.cshtml" />
     <Content Include="Views\Grafik\Index6.cshtml" />
     <Content Include="Views\Grafik\Index7.cshtml" />
+    <Content Include="Views\CariPanel\GelenMesajlar.cshtml" />
+    <Content Include="Views\CariPanel\GonderilenMesajlar.cshtml" />
+    <Content Include="Views\CariPanel\MesajDetay.cshtml" />
+    <Content Include="Views\CariPanel\YeniMesaj.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Mesaj\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -3013,6 +3024,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202411221323442_migdenemekargolar.resx">
       <DependentUpon>202411221323442_migdenemekargolar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411231014528_migmesaj.resx">
+      <DependentUpon>202411231014528_migmesaj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
