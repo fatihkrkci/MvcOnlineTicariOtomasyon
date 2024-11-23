@@ -16,9 +16,23 @@ namespace MvcOnlineTicariOtomasyon.Controllers
         public ActionResult Index()
         {
             var email = (string)Session["CariMail"];
-            var values = context.Caris.FirstOrDefault(x => x.CariMail == email);
+            var values = context.Mesajs.Where(x => x.Alici == email).ToList();
+            var mailId = context.Caris.Where(x => x.CariMail == email).Select(y => y.CariId).FirstOrDefault();
 
-            ViewBag.email = email;
+            ViewBag.MailId = mailId;
+            ViewBag.Email = email;
+
+            var toplamSatis = context.SatisHarekets.Where(x => x.CariId == mailId).Count();
+            ViewBag.ToplamSatis= toplamSatis;
+
+            var toplamTutar = context.SatisHarekets.Where(x => x.CariId == mailId).Sum(y => y.ToplamTutar);
+            ViewBag.ToplamTutar = toplamTutar;
+
+            var toplamUrun = context.SatisHarekets.Where(x => x.CariId == mailId).Sum(y => y.Adet);
+            ViewBag.ToplamUrun = toplamUrun;
+
+            var adSoyad = context.Caris.Where(x => x.CariMail == email).Select(y => y.CariAd + " " + y.CariSoyad).FirstOrDefault();
+            ViewBag.AdSoyad = adSoyad;
 
             return View(values);
         }
@@ -126,6 +140,34 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             FormsAuthentication.SignOut();
             Session.Abandon();
             return RedirectToAction("Index", "Login");
+        }
+
+
+        public PartialViewResult Partial1()
+        {
+            var email = (string)Session["CariMail"];
+            var id = context.Caris.Where(x => x.CariMail == email).Select(y => y.CariId).FirstOrDefault();
+            var caribul = context.Caris.Find(id);
+
+            return PartialView("Partial1", caribul);
+        }
+
+        public PartialViewResult Partial2()
+        {
+            var veriler = context.Mesajs.Where(x => x.Gonderici == "admin").ToList();
+
+            return PartialView(veriler);
+        }
+
+        public ActionResult CariBilgiGuncelle(Cari cr)
+        {
+            var cari = context.Caris.Find(cr.CariId);
+            cari.CariAd = cr.CariAd;
+            cari.CariSoyad = cr.CariSoyad;
+            cari.CariSifre = cr.CariSifre;
+
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

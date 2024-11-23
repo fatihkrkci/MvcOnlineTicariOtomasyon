@@ -20,8 +20,6 @@ namespace MvcOnlineTicariOtomasyon.Controllers
         [HttpGet]
         public PartialViewResult Partial1()
         {
-
-
             return PartialView();
         }
 
