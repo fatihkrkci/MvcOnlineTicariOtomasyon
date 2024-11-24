@@ -16,26 +16,49 @@ namespace MvcOnlineTicariOtomasyon.Controllers
         public ActionResult Index()
         {
             var email = (string)Session["CariMail"];
-            var values = context.Mesajs.Where(x => x.Alici == email).ToList();
-            var mailId = context.Caris.Where(x => x.CariMail == email).Select(y => y.CariId).FirstOrDefault();
+            if (string.IsNullOrEmpty(email))
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
+            var values = context.Mesajs.Where(x => x.Alici == email).ToList();
+
+            var mailId = context.Caris
+                .Where(x => x.CariMail == email)
+                .Select(y => y.CariId)
+                .FirstOrDefault();
             ViewBag.MailId = mailId;
+
             ViewBag.Email = email;
 
-            var toplamSatis = context.SatisHarekets.Where(x => x.CariId == mailId).Count();
-            ViewBag.ToplamSatis= toplamSatis;
+            // Toplam satış kontrolü
+            var toplamSatis = context.SatisHarekets
+                .Where(x => x.CariId == mailId)
+                .Count();
+            ViewBag.ToplamSatis = toplamSatis;
 
-            var toplamTutar = context.SatisHarekets.Where(x => x.CariId == mailId).Sum(y => y.ToplamTutar);
+            // Toplam tutar kontrolü (null olabilir)
+            var toplamTutar = context.SatisHarekets
+                .Where(x => x.CariId == mailId)
+                .Sum(y => (decimal?)y.ToplamTutar) ?? 0;
             ViewBag.ToplamTutar = toplamTutar;
 
-            var toplamUrun = context.SatisHarekets.Where(x => x.CariId == mailId).Sum(y => y.Adet);
+            // Toplam ürün kontrolü (null olabilir)
+            var toplamUrun = context.SatisHarekets
+                .Where(x => x.CariId == mailId)
+                .Sum(y => (int?)y.Adet) ?? 0;
             ViewBag.ToplamUrun = toplamUrun;
 
-            var adSoyad = context.Caris.Where(x => x.CariMail == email).Select(y => y.CariAd + " " + y.CariSoyad).FirstOrDefault();
+            // Ad Soyad kontrolü
+            var adSoyad = context.Caris
+                .Where(x => x.CariMail == email)
+                .Select(y => y.CariAd + " " + y.CariSoyad)
+                .FirstOrDefault() ?? "Ad Soyad Bulunamadı";
             ViewBag.AdSoyad = adSoyad;
 
             return View(values);
         }
+
 
         [Authorize]
         public ActionResult Siparislerim()

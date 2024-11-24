@@ -1,18 +1,37 @@
-﻿<div class="login-form login-form-left">
-    <div class="agile-row">
-        <h3>Yeni Cari Kaydı</h3>
-        <div class="login-agileits-top">
-            <form method="post">
-                <input type="text" class="name" name="CariAd" Placeholder="Adınız" required="" />
-                <input type="text" class="name" name="CariSoyad" Placeholder="Soyadınız" required="" />
-                <input type="text" class="name" name="CariSehir" Placeholder="Şehir" required="" />
-                <input type="email" class="email" name="CariMail" Placeholder="Mail Adresiniz" required="" />
-                <input type="password" class="password" name="CariSifre" Placeholder="Şifreniz" required="" />
-                <div class="login-check">
-                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Kuralları okudum <a href="#">&amp; Kabul Ediyorum</a></label>
+﻿<div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="ion-ios-close"></span>
+                </button>
+            </div>
+            <div class="modal-body p-4 p-md-5">
+                <div class="icon d-flex align-items-center justify-content-center" style="border: 1px solid #5bc0de">
+                    <span class="ion-ios-save" style="color: #5bc0de"></span>
                 </div>
-                <input type="submit" value="Kayıt Ol">
-            </form>
+                <h3 class="text-center mb-4">Cari Kayıt Formu</h3>
+                <form method="post" class="login-form">
+                    <div class="form-group">
+                        <input type="text" name="CariAd" class="form-control kayit rounded-left" placeholder="Adınız">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="CariSoyad" class="form-control kayit rounded-left" placeholder="Soyadınız">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="CariSehir" class="form-control kayit rounded-left" placeholder="Yaşadığınız Şehir">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="CariMail" class="form-control kayit rounded-left" placeholder="E-Posta Adresiniz">
+                    </div>
+                    <div class="form-group d-flex">
+                        <input type="password" name="CariSifre" class="form-control kayit rounded-left" placeholder="Şifreniz">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-primary rounded submit px-3" style="background: #5bc0de !important; border: #5bc0de !important; ">Kayıt Ol</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
