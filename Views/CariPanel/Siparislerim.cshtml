@@ -4,23 +4,47 @@
 @{
     ViewBag.Title = "Siparislerim";
     Layout = "~/Views/Shared/_CariLayout.cshtml";
+    int sayac = 0;
 }
 
-<br />
-<h2>Sipariş Geçmişim</h2>
-<br />
-<table class="table table-bordered">
-    <tr>
-        <th>Ürün Adı</th>
-        <th>Fiyat</th>
-        <th>Tarih</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Urun.UrunAd</td>
-            <td>@item.Fiyat</td>
-            <td>@Convert.ToDateTime(item.Tarih).ToString("dd/MM/yyyy")</td>
-        </tr>
-    }
-</table>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Sipariş Geçmişim</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">CARİ PANEL</a></li>
+            <li class="breadcrumb-item active">SİPARİŞLERİM</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ürün Adı</th>
+                                <th>Fiyat</th>
+                                <th>Tarih</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                sayac++;
+                                <tr>
+                                    <td>@sayac</td>
+                                    <td>@item.Urun.UrunAd</td>
+                                    <td>@item.Fiyat.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</td>
+                                    <td>@Convert.ToDateTime(item.Tarih).ToString("dd/MM/yyyy HH:mm")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

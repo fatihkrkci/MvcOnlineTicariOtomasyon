@@ -48,6 +48,8 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             {
                 FormsAuthentication.SetAuthCookie(infos.CariMail, false);
                 Session["CariMail"] = infos.CariMail.ToString();
+                Session["CariAdSoyad"] = infos.CariAd + " " + infos.CariSoyad;
+
                 return RedirectToAction("Index", "CariPanel");
             }
             else

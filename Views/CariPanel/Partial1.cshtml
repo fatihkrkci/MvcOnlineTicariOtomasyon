@@ -1,52 +1,74 @@
 ﻿@model MvcOnlineTicariOtomasyon.Models.Entities.Cari
 
-@using (Html.BeginForm("CariBilgiGuncelle", "CariPanel", FormMethod.Post))
-{
-    <form class="form-horizontal">
-        @Html.HiddenFor(x => x.CariId)
-        <div class="form-group row">
-            <label for="inputName" class="col-sm-2 col-form-label">Ad</label>
-            <div class="col-sm-10">
-                @Html.TextBoxFor(x => x.CariAd, new { @class = "form-control" })
-            </div>
+<div class="col-lg-8 col-xlg-9 col-md-7">
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("CariBilgiGuncelle", "CariPanel", FormMethod.Post))
+            {
+                <form class="form-horizontal form-material mx-2">
+                    @Html.HiddenFor(x => x.CariId)
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="col-md-12">Adınız</label>
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(x => x.CariAd, new { @class = "form-control form-control-line", placeholder = "Adınızı Giriniz" })
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="col-md-12">Soyadınız</label>
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(x => x.CariSoyad, new { @class = "form-control form-control-line", placeholder = "Soyadınızı Giriniz" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="col-md-12">Yaşadığınız Şehir</label>
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(x => x.CariSehir, new { @class = "form-control form-control-line", placeholder = "Yaşadığınız Şehir Bilgisini Giriniz" })
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="col-md-12">E-Posta Adresiniz</label>
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(x => x.CariMail, new { @class = "form-control form-control-line", placeholder = "E-Posta Adresinizi Giriniz" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Şifreniz</label>
+                        <div class="col-md-12 position-relative">
+                            @Html.TextBoxFor(x => x.CariSifre, new { @id = "password", @class = "form-control form-control-line", placeholder = "Şifrenizi Giriniz", type = "password" })
+                            <button type="button" class="btn btn-sm toggle-password" onclick="togglePassword()"
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background-color: #5bc0de; border-color: #5bc0de; color: white;">
+                                <i id="password-icon" class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group m-0">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success" style="background-color: #5bc0de; border-color: #5bc0de; color: white;">Bilgilerimi Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            }
         </div>
-        <div class="form-group row">
-            <label for="inputEmail" class="col-sm-2 col-form-label">Soyad</label>
-            <div class="col-sm-10">
-                @Html.TextBoxFor(x => x.CariSoyad, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputName2" class="col-sm-2 col-form-label">E-Posta Adresi</label>
-            <div class="col-sm-10">
-                @Html.TextBoxFor(x => x.CariMail, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputExperience" class="col-sm-2 col-form-label">Şehir</label>
-            <div class="col-sm-10">
-                @Html.TextBoxFor(x => x.CariSehir, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputSkills" class="col-sm-2 col-form-label">Şifre</label>
-            <div class="col-sm-10">
-                @Html.TextBoxFor(x => x.CariSifre, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="offset-sm-2 col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Şifremi değiştirmek istiyorum.
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="offset-sm-2 col-sm-10">
-                <button type="submit" class="btn btn-danger">Güncelle</button>
-            </div>
-        </div>
-    </form>
-}
+    </div>
+</div>
+
+<script>
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const passwordIcon = document.getElementById('password-icon');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordIcon.classList.remove('fa-eye');
+            passwordIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            passwordIcon.classList.remove('fa-eye-slash');
+            passwordIcon.classList.add('fa-eye');
+        }
+    }
+</script>
