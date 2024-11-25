@@ -6,35 +6,69 @@
     Layout = "~/Views/Shared/_CariLayout.cshtml";
 }
 
-<div class="container-fluid">
-    <br />
-    @using (Html.BeginForm("KargoTakip", "CariPanel", FormMethod.Get))
-    {
-        <p>
-            Kargo Takip Kodu: @Html.TextBox("p")
-            <input type="submit" value="Ara" />
-        </p>
-    }
-    <br />
-    <table class="table table-bordered">
-        <tr>
-            <th>Personel</th>
-            <th>Alıcı</th>
-            <th>Tarih</th>
-            <th>Kargo Takip Kodu</th>
-            <th>İşlemler</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Personel</td>
-                <td>@item.Alici</td>
-                <td>@item.Tarih</td>
-                <td>@item.TakipKodu</td>
-                <td>
-                    <a href="/CariPanel/CariKargoTakip/@item.TakipKodu" class="btn btn-success">Detaylar</a>
-                </td>
-            </tr>
-        }
-    </table>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Kargo Takip</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">CARİ PANEL</a></li>
+            <li class="breadcrumb-item active">KARGO TAKİP</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    @using (Html.BeginForm("KargoTakip", "CariPanel", FormMethod.Get))
+                    {
+                        <p>
+                            <div class="input-group w-25">
+                                @Html.TextBox("p", null, new { @class = "form-control", placeholder = "Kargo Takip Kodunu Girin" })
+                                <button type="submit" class="btn btn-info py-0" style="color:white">
+                                    <i class="fa fa-search" style="color:white"></i> Ara
+                                </button>
+                            </div>
+                        </p>
+                    }
+                    <br />
+                    @if (Model != null && Model.Any())
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Personel</th>
+                                    <th>Alıcı</th>
+                                    <th>Tarih</th>
+                                    <th>Kargo Takip Kodu</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Personel</td>
+                                        <td>@item.Alici</td>
+                                        <td>@Convert.ToDateTime(item.Tarih).ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>@item.TakipKodu</td>
+                                        <td>
+                                            <a href="/CariPanel/CariKargoTakip/@item.TakipKodu" class="btn btn-info" style="color:white">Detaylar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center mt-4 py-3">
+                            <h5><strong>Kargo Takip Kodunuzu Girin</strong></h5>
+                            <p class="m-0" style="font-weight:normal">Kargo durum bilgilerini görüntülemek için yukarıdaki alana kargo takip kodunuzu girin ve <strong>"Ara"</strong> butonuna tıklayın.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -7,20 +7,53 @@
     int sayac = 0;
 }
 
-<br />
-<table class="table table-striped">
-    <tr>
-        <th>Adım No</th>
-        <th>Açıklama</th>
-        <th>Tarih</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        sayac++;
-        <tr>
-            <td>@sayac</td>
-            <td>@item.Aciklama</td>
-            <td>@item.TarihZaman</td>
-        </tr>
-    }
-</table>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Kargo Takip</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">CARİ PANEL</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">KARGO TAKİP</a></li>
+            <li class="breadcrumb-item active">KARGO DETAYLARI</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model != null && Model.Any())
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Adım No</th>
+                                    <th>Açıklama</th>
+                                    <th>Tarih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    sayac++;
+                                    <tr>
+                                        <td>@sayac</td>
+                                        <td>@item.Aciklama</td>
+                                        <td>@Convert.ToDateTime(item.TarihZaman).ToString("dd/MM/yyyy HH:mm")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center mt-4 py-3">
+                            <h5><strong>Kargo Takip Kodunuzu Girin</strong></h5>
+                            <p class="m-0" style="font-weight:normal">Kargo durum bilgilerini görüntülemek için yukarıdaki alana kargo takip kodunuzu girin ve <strong>"Ara"</strong> butonuna tıklayın.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
