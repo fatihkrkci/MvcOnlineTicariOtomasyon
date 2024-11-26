@@ -12,9 +12,9 @@ namespace MvcOnlineTicariOtomasyon.Controllers
     {
         Context context = new Context();
 
-        public ActionResult Index(int page = 1)
+        public ActionResult Index()
         {
-            var categories = context.Kategoris.ToList().ToPagedList(page, 4);
+            var categories = context.Kategoris.OrderByDescending(x => x.KategoriId).ToList();
             return View(categories);
         }
 

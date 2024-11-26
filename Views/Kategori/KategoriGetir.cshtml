@@ -5,16 +5,70 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Kategori Düzenleme</h2>
-<br />
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
 
-@using (Html.BeginForm("KategoriGuncelle", "Kategori", FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.HiddenFor(x => x.KategoriId)
-        @Html.LabelFor(x => x.KategoriAd)
-        @Html.TextBoxFor(x => x.KategoriAd, new { @class = "form-control" })
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Kategori İşlemleri</h3>
+                <p class="text-subtitle text-muted">Bu sayfadan kategorilerle ilgili işlemleri gerçekleştirebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Kategori/Index/">Kategori İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Kategori Güncelle</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
     </div>
-    <button class="btn btn-warning">Güncelle</button>
-}
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Kategori Güncelle</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    @using (Html.BeginForm("KategoriGuncelle", "Kategori", FormMethod.Post))
+                    {
+                        <form class="form form-vertical">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="kategori-ad-icon">Kategori Adı</label>
+                                            <div class="position-relative">
+                                                @Html.HiddenFor(x => x.KategoriId)
+                                                @Html.TextBoxFor(x => x.KategoriAd, new { @class = "form-control", placeholder = "Kategori adını güncelleyin", id = "kategori-ad-icon" })
+                                                <div class="form-control-icon">
+                                                    <i class="bi bi-ui-radios-grid"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit"
+                                                class="btn btn-primary me-1 mb-1">
+                                            Güncelle
+                                        </button>
+                                        <button type="reset"
+                                                class="btn btn-light-secondary me-1 mb-1">
+                                            Vazgeç
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
