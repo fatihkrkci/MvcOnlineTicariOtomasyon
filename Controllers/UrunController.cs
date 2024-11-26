@@ -12,7 +12,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
     {
         Context context = new Context();
 
-        public ActionResult Index(string p, int page = 1)
+        public ActionResult Index(string p)
         {
             var products = context.Uruns.Where(x => x.Durum == true);
             if (!string.IsNullOrEmpty(p))
@@ -20,10 +20,9 @@ namespace MvcOnlineTicariOtomasyon.Controllers
                 products = products.Where(y => y.UrunAd.Contains(p));
             }
 
-            var pagedProducts = products.ToList().ToPagedList(page, 4);
-            return View(pagedProducts);
+            var allProducts = products.OrderByDescending(x => x.UrunId).ToList();
+            return View(allProducts);
         }
-
 
         [HttpGet]
         public ActionResult UrunEkle()
@@ -42,6 +41,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
         [HttpPost]
         public ActionResult UrunEkle(Urun urun)
         {
+            urun.Durum = true;
             context.Uruns.Add(urun);
             context.SaveChanges();
             return RedirectToAction("Index");

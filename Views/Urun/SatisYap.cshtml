@@ -4,38 +4,116 @@
     ViewBag.Title = "SatisYap";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<br />
-<h2>Satış Yap</h2>
-<br />
-<form method="post" class="form-group">
-    @Html.LabelFor(x => x.UrunId)
-    <input type="text" name="UrunId" value="@ViewBag.UrunID" class="form-control" readonly />
-    <br />
-    @Html.LabelFor(x => x.PersonelId)
-    @Html.DropDownListFor(x => x.PersonelId, (List<SelectListItem>)ViewBag.PersonelList, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.CariId)
-    @Html.TextBoxFor(x => x.CariId, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.Adet)
-    <input type="number" class="form-control" name="Adet" max="10" min="0" placeholder="Adet Girin" id="adet" onchange="calculate();" />
-    <br />
-    @Html.LabelFor(x => x.Fiyat)
-    <input type="text" name="Fiyat" value="@ViewBag.UrunFiyat" class="form-control" id="fiyat" onkeyup="calculate();" />
-    <br />
-    @Html.LabelFor(x => x.ToplamTutar)
-    <input type="text" name="ToplamTutar" value="0" class="form-control" id="toplamtutar" readonly />
-    <br />
-    <button class="btn btn-info">Satış Yap</button>
-</form>
+
+<link rel="stylesheet" href="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/style.css">
+
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Ürün İşlemleri</h3>
+                <p class="text-subtitle text-muted">Bu sayfadan ürünlerle ilgili işlemleri gerçekleştirebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Urun/Index">Ürün İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Satış Yap</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Yeni Satış Yap</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form class="form" method="post">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="UrunId">Ürün</label>
+                                    <input type="text" id="UrunId" name="UrunId" value="@ViewBag.UrunID"
+                                           class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="PersonelId">Personel</label>
+                                    <select id="PersonelId" name="PersonelId" class="form-control">
+                                        <option value="" disabled selected>Satışı gerçekleştiren personeli seçin</option>
+                                        @foreach (var personel in (List<SelectListItem>)ViewBag.PersonelList)
+                                        {
+                                            <option value="@personel.Value" @(personel.Selected ? "selected" : "")>
+                                                @personel.Text
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="CariId">Cari</label>
+                                    <input type="text" id="CariId" name="CariId"
+                                           class="form-control" placeholder="Cari bilgisini girin" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="Adet">Adet</label>
+                                    <input type="number" id="Adet" name="Adet" max="10" min="0"
+                                           class="form-control" placeholder="Ürün adedini girin" onchange="calculate();" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="Fiyat">Fiyat</label>
+                                    <input type="text" id="Fiyat" name="Fiyat" value="@ViewBag.UrunFiyat"
+                                           class="form-control" placeholder="Ürün fiyatını girin" onkeyup="calculate();" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="ToplamTutar">Toplam Tutar</label>
+                                    <input type="text" id="ToplamTutar" name="ToplamTutar" value="0"
+                                           class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">
+                                    Satış Yap
+                                </button>
+                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                    Vazgeç
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/simple-datatables.js"></script>
 
 <script>
     function calculate() {
-        var adet = document.getElementById('adet').value;
-        var fiyat = document.getElementById('fiyat').value;
+        var adet = document.getElementById('Adet').value;
+        var fiyat = document.getElementById('Fiyat').value;
         var toplamtutar = parseInt(adet) * parseInt(fiyat);
         if (!isNaN(toplamtutar)) {
-            document.getElementById('toplamtutar').value = toplamtutar;
+            document.getElementById('ToplamTutar').value = toplamtutar;
         }
     }
 </script>

@@ -5,34 +5,109 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Yeni Ürün Sayfası</h2>
-<br />
-<form method="post" class="form-group">
-    @Html.LabelFor(x => x.UrunAd)
-    @Html.TextBoxFor(x => x.UrunAd, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.Marka)
-    @Html.TextBoxFor(x => x.Marka, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.Stok)
-    @Html.TextBoxFor(x => x.Stok, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.AlisFiyat)
-    @Html.TextBoxFor(x => x.AlisFiyat, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.SatisFiyat)
-    @Html.TextBoxFor(x => x.SatisFiyat, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.Kategori)
-    @Html.DropDownListFor(x => x.KategoriId, (List<SelectListItem>)ViewBag.CategoryList, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.UrunGorsel)
-    @Html.TextBoxFor(x => x.UrunGorsel, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.Durum)
-    @Html.TextBoxFor(x => x.Durum, new { @class = "form-control" })
-    <br />
-    <button class="btn btn-info">Kaydet</button>
-</form>
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
 
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Ürün İşlemleri</h3>
+                <p class="text-subtitle text-muted">Bu sayfadan yeni ürün ekleme işlemlerini gerçekleştirebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Urun/Index">Ürün İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yeni Ürün Ekle</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Yeni Ürün Ekle</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form class="form" method="post">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="first-name-column">Ürün Adı</label>
+                                    <input type="text" id="first-name-column" class="form-control"
+                                           placeholder="Ürün adını yazın" name="UrunAd">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="last-name-column">Marka</label>
+                                    <input type="text" id="last-name-column" class="form-control"
+                                           placeholder="Ürünün markasını yazın" name="Marka">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="city-column">Stok</label>
+                                    <input type="text" id="city-column" class="form-control"
+                                           placeholder="Ürünün stok sayısını yazın" name="Stok">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="country-floating">Alış Fiyatı</label>
+                                    <input type="text" id="country-floating" class="form-control"
+                                           name="AlisFiyat" placeholder="Ürünün alış fiyatını yazın">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="company-column">Satış Fiyatı</label>
+                                    <input type="text" id="company-column" class="form-control"
+                                           name="SatisFiyat" placeholder="Ürünün satış fiyatını yazın">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="KategoriId">Kategori</label>
+                                    <select id="KategoriId" name="KategoriId" class="form-control">
+                                        <option value="" disabled selected>Ürünün ait olduğu kategoriyi seçin</option>
+                                        @foreach (var category in (List<SelectListItem>)ViewBag.CategoryList)
+                                        {
+                                            <option value="@category.Value" @(category.Selected ? "selected" : "")>
+                                                @category.Text
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label for="company-column">Görsel</label>
+                                    <input type="text" id="company-column" class="form-control"
+                                           name="UrunGorsel" placeholder="Ürünün görselini ekleyin">
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit"
+                                        class="btn btn-primary me-1 mb-1">
+                                    Ekle
+                                </button>
+                                <button type="reset"
+                                        class="btn btn-light-secondary me-1 mb-1">
+                                    Vazgeç
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

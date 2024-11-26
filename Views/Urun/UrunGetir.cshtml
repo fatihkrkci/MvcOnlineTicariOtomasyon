@@ -5,37 +5,111 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Ürün Güncelleme Sayfası</h2>
-<br />
+<link rel="stylesheet" href="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/style.css">
 
-@using (Html.BeginForm("UrunGuncelle", "Urun", FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.HiddenFor(x => x.UrunId)
-        @Html.LabelFor(x => x.UrunAd)
-        @Html.TextBoxFor(x => x.UrunAd, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.Marka)
-        @Html.TextBoxFor(x => x.Marka, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.Stok)
-        @Html.TextBoxFor(x => x.Stok, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.AlisFiyat)
-        @Html.TextBoxFor(x => x.AlisFiyat, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.SatisFiyat)
-        @Html.TextBoxFor(x => x.SatisFiyat, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.Kategori)
-        @Html.DropDownListFor(x => x.KategoriId, (List<SelectListItem>)ViewBag.CategoryList, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.UrunGorsel)
-        @Html.TextBoxFor(x => x.UrunGorsel, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.Durum)
-        @Html.TextBoxFor(x => x.Durum, new { @class = "form-control" })
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Ürün İşlemleri</h3>
+                <p class="text-subtitle text-muted">Bu sayfadan ürün bilgilerini güncelleme işlemlerini gerçekleştirebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Urun/Index/">Ürün İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Ürün Güncelle</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
     </div>
-    <button class="btn btn-warning">Güncelle</button>
-}
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Ürün Güncelleme Formu</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form class="form" method="post" action="/Urun/UrunGuncelle">
+                        <input type="hidden" name="UrunId" value="@Model.UrunId" />
+
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="UrunAd">Ürün Adı</label>
+                                    <input type="text" id="UrunAd" name="UrunAd" class="form-control"
+                                           placeholder="Ürün adını yazın" value="@Model.UrunAd" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="Marka">Marka</label>
+                                    <input type="text" id="Marka" name="Marka" class="form-control"
+                                           placeholder="Ürünün markasını yazın" value="@Model.Marka" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="Stok">Stok</label>
+                                    <input type="text" id="Stok" name="Stok" class="form-control"
+                                           placeholder="Stok bilgisini girin" value="@Model.Stok" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="AlisFiyat">Alış Fiyatı</label>
+                                    <input type="text" id="AlisFiyat" name="AlisFiyat" class="form-control"
+                                           placeholder="Alış fiyatını yazın" value="@Model.AlisFiyat" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="SatisFiyat">Satış Fiyatı</label>
+                                    <input type="text" id="SatisFiyat" name="SatisFiyat" class="form-control"
+                                           placeholder="Satış fiyatını yazın" value="@Model.SatisFiyat" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="KategoriId">Kategori</label>
+                                    <select id="KategoriId" name="KategoriId" class="form-control">
+                                        <option value="" disabled selected>Ürünün ait olduğu kategoriyi seçin</option>
+                                        @foreach (var category in (List<SelectListItem>)ViewBag.CategoryList)
+                                        {
+                                            <option value="@category.Value" @(Model.KategoriId == Convert.ToInt32(category.Value) ? "selected" : "")>
+                                                @category.Text
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label for="UrunGorsel">Görsel</label>
+                                    <input type="text" id="UrunGorsel" name="UrunGorsel" class="form-control"
+                                           placeholder="Görsel bağlantısını ekleyin" value="@Model.UrunGorsel" />
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">
+                                    Güncelle
+                                </button>
+                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                    Vazgeç
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
