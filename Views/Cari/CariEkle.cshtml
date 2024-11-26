@@ -1,26 +1,105 @@
 ﻿@model MvcOnlineTicariOtomasyon.Models.Entities.Cari
 
 @{
-    ViewBag.Title = "CariEkle";
+    ViewBag.Title = "Cari Ekle";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Yeni Cari Sayfası</h2>
-<br />
-<form method="post" class="form-group">
-    @Html.LabelFor(x => x.CariAd)
-    @Html.TextBoxFor(x => x.CariAd, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.CariSoyad)
-    @Html.TextBoxFor(x => x.CariSoyad, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.CariSehir)
-    @Html.TextBoxFor(x => x.CariSehir, new { @class = "form-control" })
-    <br />
-    @Html.LabelFor(x => x.CariMail)
-    @Html.TextBoxFor(x => x.CariMail, new { @class = "form-control" })
-    <br />
-    <button class="btn btn-info">Kaydet</button>
-</form>
+<link rel="stylesheet" href="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/style.css">
 
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Cari İşlemleri</h3>
+                <p class="text-subtitle text-muted">Bu sayfadan yeni bir cari ekleyebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Cari/Index/">Cari İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Yeni Cari Ekle</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Yeni Cari Ekle</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form method="post" class="form">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="CariAd">Ad</label>
+                                    <div class="position-relative">
+                                        @Html.TextBoxFor(x => x.CariAd, new { id = "CariAd", @class = "form-control", placeholder = "Cari adı yazın" })
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="CariSoyad">Soyad</label>
+                                    <div class="position-relative">
+                                        @Html.TextBoxFor(x => x.CariSoyad, new { id = "CariSoyad", @class = "form-control", placeholder = "Cari soyadı yazın" })
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="CariSehir">Şehir</label>
+                                    <div class="position-relative">
+                                        @Html.TextBoxFor(x => x.CariSehir, new { id = "CariSehir", @class = "form-control", placeholder = "Cari şehri yazın" })
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-house-door"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="CariMail">Mail</label>
+                                    <div class="position-relative">
+                                        @Html.TextBoxFor(x => x.CariMail, new { id = "CariMail", @class = "form-control", placeholder = "Cari mail adresini yazın" })
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-envelope"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">
+                                    Kaydet
+                                </button>
+                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">
+                                    Vazgeç
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/simple-datatables.js"></script>

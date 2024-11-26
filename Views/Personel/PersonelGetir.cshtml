@@ -1,28 +1,104 @@
 ﻿@model MvcOnlineTicariOtomasyon.Models.Entities.Personel
 
 @{
-    ViewBag.Title = "PersonelGetir";
+    ViewBag.Title = "Personel Güncelleme";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Personel Güncelleme Ekranı</h2>
-<br />
-@using (Html.BeginForm("PersonelGuncelle", "Personel", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="form-group">
-        @Html.HiddenFor(x => x.PersonelId)
-        @Html.LabelFor(x => x.PersonelAd)
-        @Html.TextBoxFor(x => x.PersonelAd, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.PersonelSoyad)
-        @Html.TextBoxFor(x => x.PersonelSoyad, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.PersonelGorsel)
-        <input type="file" name="PersonelGorsel" />
-        <br />
-        @Html.LabelFor(x => x.Departman)
-        @Html.DropDownListFor(x => x.DepartmanId, (List<SelectListItem>)ViewBag.DepartmanList, new { @class = "form-control" })
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Personel Güncelleme</h3>
+                <p class="text-subtitle text-muted">Bu sayfada mevcut personel bilgilerini güncelleyebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Personel/Index/">Personel İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Personel Güncelleme</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
     </div>
-    <button class="btn btn-warning">Güncelle</button>
-}
+
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Personel Bilgilerini Güncelle</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form method="post" class="form" enctype="multipart/form-data">
+                        <input type="hidden" name="PersonelId" value="@Model.PersonelId" />
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="PersonelAd">Ad</label>
+                                    <div class="position-relative">
+                                        <input type="text" id="PersonelAd" name="PersonelAd" value="@Model.PersonelAd" class="form-control" placeholder="Personel adı yazın" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="PersonelSoyad">Soyad</label>
+                                    <div class="position-relative">
+                                        <input type="text" id="PersonelSoyad" name="PersonelSoyad" value="@Model.PersonelSoyad" class="form-control" placeholder="Personel soyadı yazın" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="PersonelGorsel">Görsel</label>
+                                    <div class="position-relative">
+                                        <input type="file" id="PersonelGorsel" name="PersonelGorsel" class="form-control" style="padding-left: 48px" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-image"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="Departman">Departman</label>
+                                    <div class="position-relative">
+                                        <select id="Departman" name="DepartmanId" class="form-control">
+                                            @foreach (var item in (List<SelectListItem>)ViewBag.DepartmanList)
+                                            {
+                                                <option value="@item.Value" @(item.Value == Model.DepartmanId.ToString() ? "selected" : "")>@item.Text</option>
+                                            }
+                                        </select>
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-briefcase"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end mt-3">
+                            <button type="submit" class="btn btn-primary me-1 mb-1">Güncelle</button>
+                            <a href="@Url.Action("Index", "Personel")" class="btn btn-light-secondary me-1 mb-1">Vazgeç</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/simple-datatables.js"></script>

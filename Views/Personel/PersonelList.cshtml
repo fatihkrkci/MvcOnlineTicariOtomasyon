@@ -6,78 +6,52 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Contacts</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="~/AdminLTE-3.0.4/dist/css/adminlte.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Personeller</h1>
-                    </div>
-                </div>
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Personel İşlemleri</h3>
+                <p class="text-subtitle text-muted">Bu sayfadan personellerle ilgili işlemleri gerçekleştirebilirsiniz.</p>
             </div>
-        </section>
-        <section class="content">
-            <div class="card card-solid">
-                <div class="card-body pb-0">
-                    <div class="row d-flex align-items-stretch">
-                        @foreach (var item in Model)
-                        {
-                            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                                <div class="card bg-light">
-                                    <div class="card-header text-muted border-bottom-0">
-                                        @item.Departman.DepartmanAd
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="row">
-                                            <div class="col-7">
-                                                <h2 class="lead"><b>@item.PersonelAd @item.PersonelSoyad</b></h2>
-                                                <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
-                                                <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
-                                                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-5 text-center">
-                                                <img src="@item.PersonelGorsel" alt="" class="img-circle img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="text-right">
-                                            <a href="/Personel/PersonelGetir/@item.PersonelId" class="btn btn-sm bg-teal">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="/Departman/DepartmanPersonelSatis/@item.PersonelId" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-user"></i> Satış Geçmişi
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Personel İşlemleri</li>
+                    </ol>
+                </nav>
             </div>
-        </section>
-        <aside class="control-sidebar control-sidebar-dark">
-        </aside>
+        </div>
     </div>
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <script src="../../dist/js/demo.js"></script>
-</body>
-</html>
+    <section class="section row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body py-4 px-5">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar avatar-xl">
+                                <img src="@item.PersonelGorsel" style="object-fit: cover" alt="Face 1">
+                            </div>
+                            <div class="ms-3 name">
+                                <h5 class="font-bold">@item.PersonelAd @item.PersonelSoyad</h5>
+                                <h6 class="text-muted mb-0">@item.Departman.DepartmanAd</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Button Row -->
+                    <div class="card-footer d-flex justify-content-center">
+                        <a href="/Departman/DepartmanPersonelSatis/@item.PersonelId" class="btn btn-primary me-2">Detaylar</a>
+                        <a href="/Personel/PersonelGetir/@item.PersonelId" class="btn btn-warning">Güncelle</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+</div>

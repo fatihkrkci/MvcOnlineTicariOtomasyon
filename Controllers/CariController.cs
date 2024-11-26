@@ -13,7 +13,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
 
         public ActionResult Index()
         {
-            var cariler = context.Caris.Where(x => x.Durum == true).ToList();
+            var cariler = context.Caris.Where(x => x.Durum == true).OrderByDescending(y => y.CariId).ToList();
             return View(cariler);
         }
 

@@ -1,30 +1,101 @@
 ﻿@model MvcOnlineTicariOtomasyon.Models.Entities.Cari
 
 @{
-    ViewBag.Title = "CariGetir";
+    ViewBag.Title = "Cari Güncelleme";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Cari Güncelleme Ekranı</h2>
-<br />
-@using (Html.BeginForm("CariGuncelle", "Cari", FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.HiddenFor(x => x.CariId)
-        @Html.LabelFor(x => x.CariAd)
-        @Html.TextBoxFor(x => x.CariAd, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.CariAd, "", new { @class = "small", @style = "color:red" })
-        <br />
-        @Html.LabelFor(x => x.CariSoyad)
-        @Html.TextBoxFor(x => x.CariSoyad, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.CariSoyad, "", new { @class = "small", @style = "color:red" })
-        <br />
-        @Html.LabelFor(x => x.CariSehir)
-        @Html.TextBoxFor(x => x.CariSehir, new { @class = "form-control" })
-        <br />
-        @Html.LabelFor(x => x.CariMail)
-        @Html.TextBoxFor(x => x.CariMail, new { @class = "form-control" })
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Cari Güncelleme</h3>
+                <p class="text-subtitle text-muted">Bu sayfada mevcut cari bilgilerini güncelleyebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Cari/Index/">Cari İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cari Güncelleme</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
     </div>
-    <button class="btn btn-warning">Güncelle</button>
-}
+
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Cari Bilgilerini Güncelle</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form method="post" class="form">
+                        <input type="hidden" name="CariId" value="@Model.CariId" />
+
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="CariAd">Ad</label>
+                                    <div class="position-relative">
+                                        <input type="text" id="CariAd" name="CariAd" value="@Model.CariAd" class="form-control" placeholder="Cari adı yazın" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="CariSoyad">Soyad</label>
+                                    <div class="position-relative">
+                                        <input type="text" id="CariSoyad" name="CariSoyad" value="@Model.CariSoyad" class="form-control" placeholder="Cari soyadı yazın" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="CariSehir">Şehir</label>
+                                    <div class="position-relative">
+                                        <input type="text" id="CariSehir" name="CariSehir" value="@Model.CariSehir" class="form-control" placeholder="Cari şehri yazın" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-house-door"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="CariMail">Mail</label>
+                                    <div class="position-relative">
+                                        <input type="email" id="CariMail" name="CariMail" value="@Model.CariMail" class="form-control" placeholder="Cari mail adresini yazın" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-envelope"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">Güncelle</button>
+                                <a href="@Url.Action("Index", "Cari")" class="btn btn-light-secondary me-1 mb-1">Vazgeç</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/simple-datatables.js"></script>
