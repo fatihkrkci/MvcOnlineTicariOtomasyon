@@ -41,52 +41,77 @@
                     <form class="form" method="post">
                         <div class="row">
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="UrunId">Ürün</label>
-                                    <input type="text" id="UrunId" name="UrunId" value="@ViewBag.UrunID"
-                                           class="form-control" readonly />
+                                    <div class="position-relative">
+                                        <input type="text" id="UrunId" name="UrunId" value="@ViewBag.UrunID" class="form-control" readonly />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-box"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="PersonelId">Personel</label>
-                                    <select id="PersonelId" name="PersonelId" class="form-control">
-                                        <option value="" disabled selected>Satışı gerçekleştiren personeli seçin</option>
-                                        @foreach (var personel in (List<SelectListItem>)ViewBag.PersonelList)
-                                        {
-                                            <option value="@personel.Value" @(personel.Selected ? "selected" : "")>
-                                                @personel.Text
-                                            </option>
-                                        }
-                                    </select>
+                                    <div class="position-relative">
+                                        <select id="PersonelId" name="PersonelId" class="form-control">
+                                            <option value="" disabled selected>Satışı gerçekleştiren personeli seçin</option>
+                                            @foreach (var personel in (List<SelectListItem>)ViewBag.PersonelList)
+                                            {
+                                                <option value="@personel.Value" @(personel.Selected ? "selected" : "")>
+                                                    @personel.Text
+                                                </option>
+                                            }
+                                        </select>
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="CariId">Cari</label>
-                                    <input type="text" id="CariId" name="CariId"
-                                           class="form-control" placeholder="Cari bilgisini girin" />
+                                    <div class="position-relative">
+                                        <input type="text" id="CariId" name="CariId" class="form-control" placeholder="Cari bilgisini girin" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="Adet">Adet</label>
-                                    <input type="number" id="Adet" name="Adet" max="10" min="0"
-                                           class="form-control" placeholder="Ürün adedini girin" onchange="calculate();" />
+                                    <div class="position-relative">
+                                        <input type="number" id="Adet" name="Adet" max="10" min="0" class="form-control" placeholder="Ürün adedini girin" onchange="calculate();" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-sort-numeric-up"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="Fiyat">Fiyat</label>
-                                    <input type="text" id="Fiyat" name="Fiyat" value="@ViewBag.UrunFiyat"
-                                           class="form-control" placeholder="Ürün fiyatını girin" onkeyup="calculate();" />
+                                    <div class="position-relative">
+                                        <input type="text" id="Fiyat" name="Fiyat" value="@ViewBag.UrunFiyat" class="form-control" placeholder="Ürün fiyatını girin" onkeyup="calculate();" />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-cash"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="ToplamTutar">Toplam Tutar</label>
-                                    <input type="text" id="ToplamTutar" name="ToplamTutar" value="0"
-                                           class="form-control" readonly />
+                                    <div class="position-relative">
+                                        <input type="text" id="ToplamTutar" name="ToplamTutar" value="0" class="form-control" readonly />
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-calculator"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
@@ -111,9 +136,9 @@
     function calculate() {
         var adet = document.getElementById('Adet').value;
         var fiyat = document.getElementById('Fiyat').value;
-        var toplamtutar = parseInt(adet) * parseInt(fiyat);
+        var toplamtutar = parseInt(adet) * parseFloat(fiyat);
         if (!isNaN(toplamtutar)) {
-            document.getElementById('ToplamTutar').value = toplamtutar;
+            document.getElementById('ToplamTutar').value = toplamtutar.toFixed(2);
         }
     }
 </script>

@@ -14,7 +14,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
 
         public ActionResult Index()
         {
-            var departmans = context.Departmans.Where(x => x.Durum == true).ToList();
+            var departmans = context.Departmans.Where(x => x.Durum == true).OrderByDescending(y => y.DepartmanId).ToList();
             return View(departmans);
         }
 

@@ -5,16 +5,67 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Departman Düzenleme</h2>
-<br />
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
 
-@using (Html.BeginForm("DepartmanGuncelle", "Departman", FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.HiddenFor(x => x.DepartmanId)
-        @Html.LabelFor(x => x.DepartmanAd)
-        @Html.TextBoxFor(x => x.DepartmanAd, new { @class = "form-control" })
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Departman İşlemleri</h3>
+                <p class="text-subtitle text-muted">Bu sayfadan departman bilgilerini güncelleyebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Departman/Index/">Departman İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Departman Güncelle</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
     </div>
-    <button class="btn btn-warning">Güncelle</button>
-}
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Departman Bilgilerini Güncelle</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <form method="post" action="/Departman/DepartmanGuncelle/" class="form form-vertical">
+                        <div class="form-body">
+                            <div class="row">
+                                <input type="hidden" name="DepartmanId" value="@Model.DepartmanId" />
+                                <div class="col-12">
+                                    <div class="form-group has-icon-left">
+                                        <label for="DepartmanAd">Departman Adı</label>
+                                        <div class="position-relative">
+                                            <input type="text" name="DepartmanAd" id="DepartmanAd"
+                                                   class="form-control" value="@Model.DepartmanAd"
+                                                   placeholder="Departman adını yazın" />
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-card-heading"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">
+                                        Güncelle
+                                    </button>
+                                    <a href="/Departman/Index/" class="btn btn-light-secondary me-1 mb-1">
+                                        Vazgeç
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

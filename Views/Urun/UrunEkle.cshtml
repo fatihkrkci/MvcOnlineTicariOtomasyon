@@ -39,59 +39,88 @@
                     <form class="form" method="post">
                         <div class="row">
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="first-name-column">Ürün Adı</label>
-                                    <input type="text" id="first-name-column" class="form-control"
-                                           placeholder="Ürün adını yazın" name="UrunAd">
+                                    <div class="position-relative">
+                                        <input type="text" id="first-name-column" class="form-control" placeholder="Ürün adını yazın" name="UrunAd">
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-textarea-t"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="last-name-column">Marka</label>
-                                    <input type="text" id="last-name-column" class="form-control"
-                                           placeholder="Ürünün markasını yazın" name="Marka">
+                                    <div class="position-relative">
+                                        <input type="text" id="last-name-column" class="form-control" placeholder="Ürünün markasını yazın" name="Marka">
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-text-paragraph"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="city-column">Stok</label>
-                                    <input type="text" id="city-column" class="form-control"
-                                           placeholder="Ürünün stok sayısını yazın" name="Stok">
+                                    <div class="position-relative">
+                                        <input type="text" id="city-column" class="form-control" placeholder="Ürünün stok sayısını yazın" name="Stok">
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-sort-numeric-up"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="country-floating">Alış Fiyatı</label>
-                                    <input type="text" id="country-floating" class="form-control"
-                                           name="AlisFiyat" placeholder="Ürünün alış fiyatını yazın">
+                                    <div class="position-relative">
+                                        <input type="text" id="country-floating" class="form-control" name="AlisFiyat" placeholder="Ürünün alış fiyatını yazın">
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-cash"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="company-column">Satış Fiyatı</label>
-                                    <input type="text" id="company-column" class="form-control"
-                                           name="SatisFiyat" placeholder="Ürünün satış fiyatını yazın">
+                                    <div class="position-relative">
+                                        <input type="text" id="company-column" class="form-control" name="SatisFiyat" placeholder="Ürünün satış fiyatını yazın">
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-cash"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="KategoriId">Kategori</label>
-                                    <select id="KategoriId" name="KategoriId" class="form-control">
-                                        <option value="" disabled selected>Ürünün ait olduğu kategoriyi seçin</option>
-                                        @foreach (var category in (List<SelectListItem>)ViewBag.CategoryList)
-                                        {
-                                            <option value="@category.Value" @(category.Selected ? "selected" : "")>
-                                                @category.Text
-                                            </option>
-                                        }
-                                    </select>
+                                    <div class="position-relative">
+                                        <select id="KategoriId" name="KategoriId" class="form-control">
+                                            <option value="" disabled selected>Ürünün ait olduğu kategoriyi seçin</option>
+                                            @foreach (var category in (List<SelectListItem>)ViewBag.CategoryList)
+                                            {
+                                                <option value="@category.Value" @(category.Selected ? "selected" : "")>
+                                                    @category.Text
+                                                </option>
+                                            }
+                                        </select>
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-list"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-12">
-                                <div class="form-group">
+                                <div class="form-group has-icon-left">
                                     <label for="company-column">Görsel</label>
-                                    <input type="text" id="company-column" class="form-control"
-                                           name="UrunGorsel" placeholder="Ürünün görselini ekleyin">
+                                    <div class="position-relative">
+                                        <input type="text" id="company-column" class="form-control" name="UrunGorsel" placeholder="Ürünün görselini ekleyin">
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-image"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-end">

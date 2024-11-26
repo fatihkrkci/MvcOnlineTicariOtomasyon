@@ -6,24 +6,70 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Departman Detay Sayfası</h2>
-<br />
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Departman Adı: @ViewBag.Departman</li>
-</ol>
-<table class="table table-hover">
-    <tr>
-        <th>Personel</th>
-        <th>İşlemler</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.PersonelAd @item.PersonelSoyad</td>
-            <td>
-                <a href="/Departman/DepartmanPersonelSatis/@item.PersonelId" class="btn btn-info">Satışlar</a>
-            </td>
-        </tr>
-    }
-</table>
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Departman İşlemleri</h3>
+                <p class="text-subtitle text-muted">
+                    Departmana ait personel bilgilerini ve işlemleri görüntüleyebilirsiniz.
+                </p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Dashboard/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Departman/Index/">Departman İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Detaylar</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Departman Adı: @ViewBag.Departman</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <table class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>Personel</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.PersonelAd @item.PersonelSoyad</td>
+                                    <td>
+                                        <a href="/Departman/DepartmanPersonelSatis/@item.PersonelId"
+                                           class="btn btn-info">
+                                            <i class="bi bi-cart"></i> Satışlar
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            @if (!Model.Any())
+                            {
+                                <tr>
+                                    <td colspan="2" class="text-center text-muted">Bu departmana ait personel bulunmamaktadır.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
