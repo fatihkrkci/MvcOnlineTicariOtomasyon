@@ -2,21 +2,69 @@
 @model List<KargoTakip>
 
 @{
-    ViewBag.Title = "KargoTakip";
+    ViewBag.Title = "Kargo Takip Detayları";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<table class="table table-striped">
-    <tr>
-        <th>Açıklama</th>
-        <th>Tarih</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Aciklama</td>
-            <td>@item.TarihZaman</td>
-        </tr>
-    }
-</table>
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Kargo Takip İşlemleri</h3>
+                <p class="text-subtitle text-muted">
+                    Kargo takip detaylarını ve geçmiş işlemleri görüntüleyebilirsiniz.
+                </p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Istatistik/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Kargo/Index/">Kargo İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Kargo Takip Detayları</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom: 0">
+                <h4 class="card-title">Kargo Takip Bilgileri</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <table class="table table-lg table-striped">
+                        <thead>
+                            <tr>
+                                <th>Açıklama</th>
+                                <th>Tarih</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Aciklama</td>
+                                    <td>@item.TarihZaman.ToString("dd.MM.yyyy HH:mm")</td>
+                                </tr>
+                            }
+                            @if (!Model.Any())
+                            {
+                                <tr>
+                                    <td colspan="2" class="text-center text-muted">Bu kargo için herhangi bir takip kaydı bulunmamaktadır.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

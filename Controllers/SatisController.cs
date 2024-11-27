@@ -13,7 +13,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
 
         public ActionResult Index()
         {
-            var satislar = context.SatisHarekets.ToList();
+            var satislar = context.SatisHarekets.OrderByDescending(x => x.SatisHareketId).ToList();
             return View(satislar);
         }
 

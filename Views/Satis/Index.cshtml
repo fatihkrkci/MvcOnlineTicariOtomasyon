@@ -2,54 +2,92 @@
 @model List<SatisHareket>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Satış İşlemleri";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<a href="/Satis/SatisEkle" class="btn btn-primary">Yeni Satış Yap</a>
-<br />
-<br />
+<link rel="stylesheet" href="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/style.css">
 
-<table id="tbl1" class="table table-striped">
-    <thead>
-        <tr>
-            <th>Satış ID</th>
-            <th>Ürün</th>
-            <th>Cari</th>
-            <th>Personel</th>
-            <th>Adet</th>
-            <th>Fiyat</th>
-            <th>Toplam Tutar</th>
-            <th>Tarih</th>
-            <th>İşlemler</th>
-        </tr>
-    </thead>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.SatisHareketId</td>
-            <td>@item.Urun.UrunAd</td>
-            <td>@item.Cari.CariAd @item.Cari.CariSoyad</td>
-            <td>@item.Personel.PersonelAd @item.Personel.PersonelSoyad</td>
-            <td>@item.Adet</td>
-            <td>@item.Fiyat</td>
-            <td>@item.ToplamTutar</td>
-            <td>@item.Tarih.ToString("dd.MM.yyyy")</td>
-            <td>
-                <a href="/Satis/SatisDetay/@item.SatisHareketId" class="btn btn-success">Detaylar</a>
-                <a href="/Satis/SatisGetir/@item.SatisHareketId" class="btn btn-warning">Güncelle</a>
-            </td>
-        </tr>
-    }
-</table>
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
 
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Satış İşlemleri</h3>
+                <p class="text-subtitle text-muted">Bu sayfada satış işlemlerini yönetebilirsiniz.</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Istatistik/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Satış İşlemleri</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
 
-<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <a href="/Satis/SatisEkle" class="btn btn-primary">Yeni Satış Yap</a>
+            </div>
+            <div class="card-body">
+                <table id="tbl1" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Satış ID</th>
+                            <th>Ürün</th>
+                            <th>Cari</th>
+                            <th>Personel</th>
+                            <th>Adet</th>
+                            <th>Fiyat</th>
+                            <th>Toplam Tutar</th>
+                            <th>Tarih</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.SatisHareketId</td>
+                                <td>@item.Urun.UrunAd</td>
+                                <td>@item.Cari.CariAd @item.Cari.CariSoyad</td>
+                                <td>@item.Personel.PersonelAd @item.Personel.PersonelSoyad</td>
+                                <td>@item.Adet</td>
+                                <td>@item.Fiyat.ToString("0.00")</td>
+                                <td>@item.ToplamTutar.ToString("0.00")</td>
+                                <td>@item.Tarih.ToString("dd.MM.yyyy")</td>
+                                <td>
+                                    <a href="/Satis/SatisDetay/@item.SatisHareketId" class="btn btn-success">Detaylar</a>
+                                    <a href="/Satis/SatisGetir/@item.SatisHareketId" class="btn btn-warning">Güncelle</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/simple-datatables.js"></script>
 <script>
-    $('#tbl1').dataTable({});
+    let tbl1 = document.querySelector('#tbl1');
+    let dataTable = new simpleDatatables.DataTable(tbl1, {
+        searchable: true,
+        fixedHeight: true,
+        perPage: 5,
+        labels: {
+            placeholder: "Ara...",
+            noRows: "Gösterilecek kayıt bulunamadı",
+            info: "Toplam {rows} kayıttan {start} ve {end} arasındakiler gözüküyor"
+        }
+    });
 </script>

@@ -73,7 +73,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             {
                 FormsAuthentication.SetAuthCookie(infos.KullaniciAd, false);
                 Session["KullaniciAd"] = infos.KullaniciAd.ToString();
-                return RedirectToAction("Index", "Kategori");
+                return RedirectToAction("Index", "Istatistik");
             }
             else
             {

@@ -6,32 +6,75 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<br />
-<h2>Satış Detayı</h2>
-<br />
-<button href></button>
-<table class="table table-condensed">
-    <tr>
-        <th>Satış ID</th>
-        <th>Ürün</th>
-        <th>Cari</th>
-        <th>Personel</th>
-        <th>Fiyat</th>
-        <th>Adet</th>
-        <th>Toplam</th>
-        <th>Tarih</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.SatisHareketId</td>
-            <td>@item.Urun.UrunAd</td>
-            <td>@item.Cari.CariAd @item.Cari.CariSoyad</td>
-            <td>@item.Personel.PersonelAd @item.Personel.PersonelSoyad</td>
-            <td>@item.Fiyat</td>
-            <td>@item.Adet</td>
-            <td>@item.ToplamTutar</td>
-            <td>@item.Tarih.ToString("dd.MM.yyyy")</td>
-        </tr>
-    }
-</table>
+<header class="mb-3">
+    <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+    </a>
+</header>
+
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Satış Detayı</h3>
+                <p class="text-subtitle text-muted">
+                    Bu sayfada satış detaylarını görüntüleyebilirsiniz.
+                </p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Istatistik/Index/">Personel Paneli</a></li>
+                        <li class="breadcrumb-item"><a href="/Satis/Index/">Satış İşlemleri</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Satış Detayı</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="card">
+            <div class="card-header" style="padding-bottom:0">
+                <h4 class="card-title">Satış Bilgileri</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Ürün</th>
+                                <th>Cari</th>
+                                <th>Personel</th>
+                                <th>Fiyat</th>
+                                <th>Adet</th>
+                                <th>Toplam</th>
+                                <th>Tarih</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Urun.UrunAd</td>
+                                    <td>@item.Cari.CariAd @item.Cari.CariSoyad</td>
+                                    <td>@item.Personel.PersonelAd @item.Personel.PersonelSoyad</td>
+                                    <td>@item.Fiyat₺</td>
+                                    <td>@item.Adet</td>
+                                    <td>@item.ToplamTutar</td>
+                                    <td>@item.Tarih.ToString("dd.MM.yyyy")</td>
+                                </tr>
+                            }
+                            @if (!Model.Any())
+                            {
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted">Bu satış bilgileri bulunmamaktadır.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

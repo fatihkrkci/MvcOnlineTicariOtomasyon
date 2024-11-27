@@ -52,17 +52,19 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             var deger13 = context.Uruns.Where(u => u.UrunId == context.SatisHarekets.GroupBy(x => x.UrunId).OrderByDescending(z => z.Count()).Select(y => y.Key).FirstOrDefault()).Select(k => k.UrunAd).FirstOrDefault();
             ViewBag.d13 = deger13;
 
-            var deger14 = context.SatisHarekets.Sum(x => x.ToplamTutar).ToString();
-            ViewBag.d14 = deger14;
+            var deger14 = context.SatisHarekets.Sum(x => x.ToplamTutar);
+            ViewBag.d14 = deger14.ToString("C", new System.Globalization.CultureInfo("tr-TR"));
 
             DateTime bugun = DateTime.Today;
             var deger15 = context.SatisHarekets.Count(x => x.Tarih == bugun).ToString();
             ViewBag.d15 = deger15;
 
             var deger16 = context.SatisHarekets.Where(x => x.Tarih == bugun).Sum(y => (decimal?)y.ToplamTutar) ?? 0;
-            ViewBag.d16 = deger16.ToString();
+            ViewBag.d16 = deger16.ToString("C", new System.Globalization.CultureInfo("tr-TR"));
 
-            return View();
+            var latestProduct = context.Uruns.OrderByDescending(x => x.UrunId).Take(2).ToList();
+
+            return View(latestProduct);
         }
 
         public ActionResult SimpleTables()
