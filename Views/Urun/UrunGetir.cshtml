@@ -39,11 +39,9 @@
             <div class="card-content">
                 <div class="card-body">
                     <form class="form" method="post" action="/Urun/UrunGuncelle">
-                        <!-- Ürün ID (Gizli) -->
                         <input type="hidden" name="UrunId" value="@Model.UrunId" />
 
                         <div class="row">
-                            <!-- Ürün Adı -->
                             <div class="col-md-6 col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="UrunAd">Ürün Adı</label>
@@ -56,7 +54,6 @@
                                 </div>
                             </div>
 
-                            <!-- Marka -->
                             <div class="col-md-6 col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="Marka">Marka</label>
@@ -69,7 +66,6 @@
                                 </div>
                             </div>
 
-                            <!-- Stok -->
                             <div class="col-md-6 col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="Stok">Stok</label>
@@ -82,7 +78,6 @@
                                 </div>
                             </div>
 
-                            <!-- Alış Fiyatı -->
                             <div class="col-md-6 col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="AlisFiyat">Alış Fiyatı</label>
@@ -95,7 +90,6 @@
                                 </div>
                             </div>
 
-                            <!-- Satış Fiyatı -->
                             <div class="col-md-6 col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="SatisFiyat">Satış Fiyatı</label>
@@ -108,7 +102,6 @@
                                 </div>
                             </div>
 
-                            <!-- Kategori -->
                             <div class="col-md-6 col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="KategoriId">Kategori</label>
@@ -129,8 +122,7 @@
                                 </div>
                             </div>
 
-                            <!-- Görsel -->
-                            <div class="col-md-12 col-12">
+                            <div class="col-md-6 col-12">
                                 <div class="form-group has-icon-left">
                                     <label for="UrunGorsel">Görsel</label>
                                     <div class="position-relative">
@@ -142,7 +134,22 @@
                                 </div>
                             </div>
 
-                            <!-- Butonlar -->
+                            <div class="col-md-6 col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="Durum">Durum</label>
+                                    <div class="position-relative">
+                                        <select id="Durum" name="Durum" class="form-control">
+                                            <option value="true" @(Model.Durum ? "selected" : "")>Aktif</option>
+                                            <option value="false" @(!Model.Durum ? "selected" : "")>Pasif</option>
+                                        </select>
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-toggle-on"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary me-1 mb-1">Güncelle</button>
                                 <button type="reset" class="btn btn-light-secondary me-1 mb-1">Vazgeç</button>
