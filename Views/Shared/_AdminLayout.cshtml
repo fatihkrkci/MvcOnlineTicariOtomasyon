@@ -41,14 +41,13 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title">MENÜ</li>
-
                         <li class="sidebar-item">
                             <a href="/Istatistik/Index/" class='sidebar-link'>
                                 <i class="bi bi-grid"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
+                        <li class="sidebar-title">İşlemler</li>
                         <li class="sidebar-item">
                             <a href="/Kategori/Index/" class='sidebar-link'>
                                 <i class="bi bi-ui-radios-grid"></i>
@@ -79,23 +78,7 @@
                                 <span>Personel İşlemleri</span>
                             </a>
                         </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-bar-chart-line"></i>
-                                <span>Grafikler</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="/Grafik/Index5/">Pie Grafiği</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="/Grafik/Index6/">Line Grafiği</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="/Grafik/Index7/">Column Grafiği</a>
-                                </li>
-                            </ul>
-                        </li>
+
 
 
                         <li class="sidebar-title">Rapor &amp; Fatura</li>
@@ -114,6 +97,24 @@
                                 <span>Faturalar</span>
                             </a>
                         </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-bar-chart-line"></i>
+                                <span>Grafikler</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="/Grafik/Index5/">Pie Grafiği</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="/Grafik/Index6/">Line Grafiği</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="/Grafik/Index7/">Column Grafiği</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-title">Diğer</li>
                         <li class="sidebar-item  ">
                             <a href="/Kargo/Index/" class='sidebar-link'>
                                 <i class="bi bi-truck"></i>
@@ -127,21 +128,9 @@
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="form-layout.html" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>!!Giderler!!</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="form-layout.html" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>!!PDF & Excel!!</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="/UrunDetay/Index/" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Ürün Detay</span>
+                            <a href="/Login/LogOut/" class='sidebar-link'>
+                                <i class="bi bi-signpost"></i>
+                                <span>Çıkış Yap</span>
                             </a>
                         </li>
                     </ul>
@@ -151,8 +140,7 @@
         </div>
         <div id="main" class="d-flex flex-column min-vh-100">
             @RenderBody()
-
-            <footer class="mt-auto w-100 text-center py-3">
+            <footer class="mt-auto w-100 text-center">
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>@DateTime.Now.Year &copy; Mazer</p>

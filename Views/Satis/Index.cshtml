@@ -41,7 +41,6 @@
                 <table id="tbl1" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Satış ID</th>
                             <th>Ürün</th>
                             <th>Cari</th>
                             <th>Personel</th>
@@ -56,7 +55,6 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.SatisHareketId</td>
                                 <td>@item.Urun.UrunAd</td>
                                 <td>@item.Cari.CariAd @item.Cari.CariSoyad</td>
                                 <td>@item.Personel.PersonelAd @item.Personel.PersonelSoyad</td>

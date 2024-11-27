@@ -33,8 +33,12 @@
     </div>
     <section class="section">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
                 <a href="/Urun/UrunEkle" class="btn btn-primary">Yeni Ürün Ekle</a>
+                <div>
+                    <button id="exportExcel" class="btn btn-success">Excel'e Aktar</button>
+                    <button id="exportPDF" class="btn btn-danger">PDF'e Aktar</button>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table table-striped" id="table1">
@@ -73,7 +77,11 @@
     </section>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 <script src="~/mazer-1.0.0/dist/assets/vendors/simple-datatables/simple-datatables.js"></script>
+
 <script>
     let table1 = document.querySelector('#table1');
     let dataTable = new simpleDatatables.DataTable(table1, {
@@ -85,5 +93,54 @@
             noRows: "Gösterilecek kayıt bulunamadı",
             info: "Toplam {rows} kayıttan {start} ve {end} arasındakiler gözüküyor"
         }
+    });
+
+    document.getElementById('exportExcel').addEventListener('click', function () {
+        let data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(item => new
+        {
+            item.UrunAd,
+            item.Marka,
+            item.Stok,
+            AlisFiyat = item.AlisFiyat,
+            SatisFiyat = item.SatisFiyat,
+            Kategori = item.Kategori.KategoriAd
+        })));
+
+        let headers = ["Ürün Adı", "Marka", "Stok", "Alış Fiyatı", "Satış Fiyatı", "Kategori"];
+
+        let worksheet = XLSX.utils.json_to_sheet(data);
+        XLSX.utils.sheet_add_aoa(worksheet, [headers], { origin: "A1" });
+        let workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Ürünler");
+        XLSX.writeFile(workbook, 'urunler.xlsx');
+    });
+
+    document.getElementById('exportPDF').addEventListener('click', async function () {
+        const { jsPDF } = window.jspdf;
+
+        let data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(item => new
+        {
+            item.UrunAd,
+            item.Marka,
+            item.Stok,
+            AlisFiyat = item.AlisFiyat,
+            SatisFiyat = item.SatisFiyat,
+            Kategori = item.Kategori.KategoriAd
+        })));
+
+        let pdf = new jsPDF('l', 'mm', 'a4');
+        let headers = ["Ürün Adı", "Marka", "Stok", "Alış Fiyatı", "Satış Fiyatı", "Kategori"];
+        let rows = data.map(item => Object.values(item));
+
+        pdf.text('Ürün Listesi', 14, 20);
+        pdf.autoTable({
+            head: [headers],
+            body: rows,
+            startY: 30,
+            theme: 'grid',
+            styles: { fontSize: 8 },
+        });
+
+        pdf.save('urunler.pdf');
     });
 </script>

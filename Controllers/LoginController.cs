@@ -80,5 +80,12 @@ namespace MvcOnlineTicariOtomasyon.Controllers
                 return RedirectToAction("Index", "Login");
             }
         }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
